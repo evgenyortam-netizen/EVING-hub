@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>EVING — A Lab for Micro-Apps</title>
+<meta name="description" content="A small lab for micro-apps. Built by hand, for the way I actually work.">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230A0A0A'/%3E%3Ctext x='50' y='66' font-family='system-ui' font-weight='900' font-size='56' fill='%23fff' text-anchor='middle'%3EE%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;800;900&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A0A0A;
+  --fg:#FFFFFF;
+  --dim:rgba(255,255,255,0.45);
+  --line:rgba(255,255,255,0.08);
+  --line-strong:rgba(255,255,255,0.18);
+  --ac:#C5FF3F;
+  --sans:'Syne',system-ui,sans-serif;
+  --mono:'DM Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--fg);font-family:var(--mono);font-weight:400;-webkit-font-smoothing:antialiased}
+body{min-height:100dvh;overflow-x:hidden;padding:max(env(safe-area-inset-top),24px) clamp(20px,5vw,64px) max(env(safe-area-inset-bottom),24px)}
+a{color:inherit;text-decoration:none;transition:color .15s ease}
+a:hover{color:var(--ac)}
+
+.wrap{max-width:1280px;margin:0 auto}
+
+/* Header */
+header{display:flex;align-items:center;justify-content:space-between;padding:8px 0 96px}
+.brand{font-family:var(--sans);font-weight:900;font-size:22px;letter-spacing:-0.02em;line-height:1}
+.brand .dot{color:var(--ac)}
+.tag{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;color:var(--dim);text-transform:uppercase}
+
+/* Hero */
+.hero{padding:clamp(40px,8vw,120px) 0 clamp(80px,12vw,160px);border-bottom:1px solid var(--line)}
+.hero h1{font-family:var(--sans);font-weight:900;font-size:clamp(40px,8.4vw,128px);line-height:0.94;letter-spacing:-0.04em;text-transform:uppercase}
+.hero h1 .nl{display:block}
+.hero p{margin-top:clamp(24px,4vw,40px);max-width:540px;font-size:14px;line-height:1.6;color:var(--dim)}
+
+/* Section heads */
+.sec{padding:clamp(64px,10vw,140px) 0;border-bottom:1px solid var(--line)}
+.sec-hdr{font-family:var(--mono);font-size:11px;letter-spacing:0.22em;color:var(--dim);text-transform:uppercase;margin-bottom:clamp(32px,5vw,56px)}
+
+/* Lab: single tile */
+.lab-grid{display:grid;grid-template-columns:1fr;gap:24px;perspective:1400px}
+.tile{
+  position:relative;
+  display:block;
+  border:1px solid var(--line);
+  background:#121212;
+  padding:clamp(28px,4vw,48px);
+  min-height:clamp(280px,38vw,420px);
+  transform-style:preserve-3d;
+  transform:translateZ(0) rotateX(0) rotateY(0);
+  transition:transform .35s cubic-bezier(.2,.8,.2,1), border-color .25s ease, box-shadow .35s ease, background-color .25s ease;
+  overflow:hidden;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.04),
+    0 12px 28px rgba(0,0,0,0.55),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+}
+/* Top accent bar (lime) — visible only on hover */
+.tile::before{
+  content:"";
+  position:absolute;
+  top:0;left:clamp(28px,4vw,48px);right:clamp(28px,4vw,48px);
+  height:2px;
+  background:linear-gradient(90deg, transparent, var(--ac), transparent);
+  border-radius:0 0 4px 4px;
+  opacity:0;
+  transition:opacity .3s ease;
+  pointer-events:none;
+}
+/* Diagonal lime ring — visible only on hover */
+.tile::after{
+  content:"";
+  position:absolute;
+  bottom:-60px;right:-60px;
+  width:220px;height:220px;
+  border:1px solid rgba(197,255,63,0.12);
+  border-radius:50%;
+  opacity:0;
+  transition:opacity .35s ease, transform .5s ease;
+  transform:scale(0.85);
+  pointer-events:none;
+}
+.tile:hover{
+  border-color:rgba(197,255,63,0.35);
+  color:var(--fg);
+  transform:translateY(-3px) rotateX(1deg) rotateY(-1.5deg);
+  box-shadow:
+    0 0 0 1px rgba(197,255,63,0.08),
+    0 20px 40px rgba(0,0,0,0.6),
+    0 0 30px rgba(197,255,63,0.06),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+}
+.tile:hover::before{opacity:0.7}
+.tile:hover::after{opacity:0.6;transform:scale(0.95)}
+.tile:hover .tile-num{color:var(--ac)}
+.tile-num{font-family:var(--mono);font-size:11px;letter-spacing:0.22em;color:var(--dim)}
+.tile-title{font-family:var(--sans);font-weight:900;font-size:clamp(40px,7vw,96px);line-height:0.95;letter-spacing:-0.03em;margin-top:24px;text-transform:uppercase}
+.tile-desc{font-family:var(--mono);font-size:13px;line-height:1.6;color:var(--dim);max-width:420px;margin-top:20px}
+.tile-foot{position:absolute;left:clamp(28px,4vw,48px);right:clamp(28px,4vw,48px);bottom:clamp(28px,4vw,48px);display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:0.22em;text-transform:uppercase}
+.live{color:var(--ac);display:inline-flex;align-items:center;gap:8px}
+.live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ac);box-shadow:0 0 8px var(--ac)}
+.arrow{transition:transform .2s ease}
+.tile:hover .arrow{transform:translateX(6px);color:var(--ac)}
+
+/* Manifesto */
+.manifesto p{font-family:var(--sans);font-weight:600;font-size:clamp(22px,3.4vw,40px);line-height:1.25;letter-spacing:-0.01em;max-width:880px}
+.manifesto p + p{margin-top:24px;color:var(--dim)}
+
+/* Contact */
+.contact-row{display:flex;flex-direction:column;gap:12px}
+.contact-row a{font-family:var(--sans);font-weight:800;font-size:clamp(36px,7vw,88px);line-height:1;letter-spacing:-0.03em;display:inline-block;text-transform:lowercase}
+
+/* Footer */
+footer{padding:48px 0 8px;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10px;letter-spacing:0.22em;color:var(--dim);text-transform:uppercase}
+
+@media (max-width:640px){
+  header{padding-bottom:64px}
+  .tile-foot{position:static;margin-top:32px;left:auto;right:auto;bottom:auto}
+  footer{flex-direction:column;gap:12px;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="brand">EVING<span class="dot">.</span></div>
+    <div class="tag">Lab // 2026</div>
+  </header>
+
+  <section class="hero">
+    <h1>
+      <span class="nl">A Lab</span>
+      <span class="nl">For Micro-</span>
+      <span class="nl">Apps.</span>
+    </h1>
+    <p>Small tools, built by hand, for the way I actually work. Shipped when ready, not when scheduled.</p>
+  </section>
+
+  <section class="sec lab" id="lab">
+    <div class="sec-hdr">// The Lab</div>
+    <div class="lab-grid">
+      <a class="tile" href="https://texts.ieving.com" target="_blank" rel="noopener">
+        <div class="tile-num">01</div>
+        <div class="tile-title">TEXTS</div>
+        <div class="tile-desc">A snippet keyboard for your clipboard. Categorised, synced, one tap to copy. Lives on iPhone, iPad, Android, desktop.</div>
+        <div class="tile-foot">
+          <span class="live">Live</span>
+          <span class="arrow">texts.ieving.com →</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="sec manifesto" id="manifesto">
+    <div class="sec-hdr">// Manifesto</div>
+    <p>I don't ship for a market. I ship for me.</p>
+    <p>If a tool helps you too, that's a bonus — not the point.</p>
+  </section>
+
+  <section class="sec contact" id="contact">
+    <div class="sec-hdr">// Get In Touch</div>
+    <div class="contact-row">
+      <a href="mailto:ev@ieving.com">ev@ieving.com</a>
+    </div>
+  </section>
+
+  <footer>
+    <div>EVING // Lab // MMXXVI</div>
+    <div>All systems nominal</div>
+  </footer>
+
+</div>
+</body>
+</html>
