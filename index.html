@@ -88,7 +88,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:8px
   transform:scale(0.85);
   pointer-events:none;
 }
-.tile:hover{
+.tile:hover, .tile.is-armed{
   border-color:rgba(197,255,63,0.35);
   color:var(--fg);
   transform:translateY(-3px) rotateX(1deg) rotateY(-1.5deg);
@@ -98,9 +98,13 @@ header{display:flex;align-items:center;justify-content:space-between;padding:8px
     0 0 30px rgba(197,255,63,0.06),
     inset 0 1px 0 rgba(255,255,255,0.06);
 }
-.tile:hover::before{opacity:0.7}
-.tile:hover::after{opacity:0.6;transform:scale(0.95)}
-.tile:hover .tile-num{color:var(--ac)}
+.tile:hover::before, .tile.is-armed::before{opacity:0.7}
+.tile:hover::after, .tile.is-armed::after{opacity:0.6;transform:scale(0.95)}
+.tile:hover .tile-num, .tile.is-armed .tile-num{color:var(--ac)}
+/* Touch devices: keep lime feedback, drop the 3D tilt (looks off without cursor parallax) */
+@media (hover:none){
+  .tile.is-armed{transform:translateY(-2px)}
+}
 .tile-num{font-family:var(--mono);font-size:11px;letter-spacing:0.22em;color:var(--dim)}
 .tile-title{font-family:var(--sans);font-weight:900;font-size:clamp(40px,7vw,96px);line-height:0.95;letter-spacing:-0.03em;margin-top:24px;text-transform:uppercase}
 .tile-desc{font-family:var(--mono);font-size:13px;line-height:1.6;color:var(--dim);max-width:420px;margin-top:20px}
@@ -173,5 +177,24 @@ footer{padding:48px 0 8px;display:flex;justify-content:space-between;align-items
   </footer>
 
 </div>
+<script>
+  // Touch devices: first tap arms (lime preview), second tap opens link.
+  if (window.matchMedia && window.matchMedia('(hover: none)').matches) {
+    document.querySelectorAll('.tile').forEach(function(tile){
+      tile.addEventListener('click', function(e){
+        if (!tile.classList.contains('is-armed')) {
+          e.preventDefault();
+          document.querySelectorAll('.tile.is-armed').forEach(function(t){ t.classList.remove('is-armed'); });
+          tile.classList.add('is-armed');
+        }
+      });
+    });
+    document.addEventListener('click', function(e){
+      if (!e.target.closest('.tile')) {
+        document.querySelectorAll('.tile.is-armed').forEach(function(t){ t.classList.remove('is-armed'); });
+      }
+    }, true);
+  }
+</script>
 </body>
 </html>
