@@ -3,9 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>EVING — A Lab for Micro-Apps</title>
-<meta name="description" content="A small lab for micro-apps. Built by hand, for the way I actually work.">
+<title>EVING — Ping different.</title>
+<meta name="description" content="EVING Lab — a small studio for micro-apps. Ping different.">
 <meta name="theme-color" content="#0A0A0A">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ieving.com">
+<meta property="og:title" content="EVING — Ping different.">
+<meta property="og:description" content="A small lab for micro-apps. Ping different.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="EVING — Ping different.">
+<meta name="twitter:description" content="A small lab for micro-apps. Ping different.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230A0A0A'/%3E%3Ctext x='50' y='66' font-family='system-ui' font-weight='900' font-size='56' fill='%23fff' text-anchor='middle'%3EE%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,6 +47,8 @@ header{display:flex;align-items:center;justify-content:space-between;padding:8px
 .hero h1{font-family:var(--sans);font-weight:900;font-size:clamp(40px,8.4vw,128px);line-height:0.94;letter-spacing:-0.04em;text-transform:uppercase}
 .hero h1 .nl{display:block}
 .hero p{margin-top:clamp(24px,4vw,40px);max-width:540px;font-size:14px;line-height:1.6;color:var(--dim)}
+.tagline{font-family:var(--sans);font-weight:800;font-size:clamp(22px,3.2vw,36px);line-height:1;letter-spacing:-0.02em;color:var(--fg);margin-top:clamp(28px,4vw,40px)}
+.tagline .dot{color:var(--ac)}
 
 /* Section heads */
 .sec{padding:clamp(64px,10vw,140px) 0;border-bottom:1px solid var(--line)}
@@ -108,6 +117,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:8px
 .tile-num{font-family:var(--mono);font-size:11px;letter-spacing:0.22em;color:var(--dim)}
 .tile-title{font-family:var(--sans);font-weight:900;font-size:clamp(40px,7vw,96px);line-height:0.95;letter-spacing:-0.03em;margin-top:24px;text-transform:uppercase}
 .tile-desc{font-family:var(--mono);font-size:13px;line-height:1.6;color:var(--dim);max-width:420px;margin-top:20px}
+.tile-platforms{font-family:var(--mono);font-size:12px;line-height:1.6;color:rgba(255,255,255,0.32);margin-top:14px;letter-spacing:0.02em}
 .tile-foot{position:absolute;left:clamp(28px,4vw,48px);right:clamp(28px,4vw,48px);bottom:clamp(28px,4vw,48px);display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:0.22em;text-transform:uppercase}
 .live{color:var(--ac);display:inline-flex;align-items:center;gap:8px}
 .live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ac);box-shadow:0 0 8px var(--ac)}
@@ -118,17 +128,14 @@ header{display:flex;align-items:center;justify-content:space-between;padding:8px
 .manifesto p{font-family:var(--sans);font-weight:600;font-size:clamp(22px,3.4vw,40px);line-height:1.25;letter-spacing:-0.01em;max-width:880px}
 .manifesto p + p{margin-top:24px;color:var(--dim)}
 
-/* Contact */
-.contact-row{display:flex;flex-direction:column;gap:12px}
-.contact-row a{font-family:var(--sans);font-weight:800;font-size:clamp(26px,7vw,88px);line-height:1;letter-spacing:-0.04em;display:inline-block;text-transform:lowercase;max-width:100%;word-break:break-word}
-
 /* Footer */
-footer{padding:48px 0 8px;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10px;letter-spacing:0.22em;color:var(--dim);text-transform:uppercase}
+footer{padding:clamp(80px,12vw,140px) 0 8px;display:flex;flex-direction:column;gap:10px;align-items:flex-start;font-family:var(--mono);font-size:11px;letter-spacing:0.18em;color:var(--dim);text-transform:uppercase}
+footer a{color:var(--dim)}
+footer a:hover{color:var(--ac)}
 
 @media (max-width:640px){
   header{padding-bottom:64px}
   .tile-foot{position:static;margin-top:32px;left:auto;right:auto;bottom:auto}
-  footer{flex-direction:column;gap:12px;align-items:flex-start}
 }
 </style>
 </head>
@@ -147,33 +154,28 @@ footer{padding:48px 0 8px;display:flex;justify-content:space-between;align-items
       <span class="nl">Apps.</span>
     </h1>
     <p>small tools to simplify my everyday tasks</p>
+    <div class="tagline">Ping different<span class="dot">.</span></div>
   </section>
 
   <section class="sec lab" id="lab">
     <div class="sec-hdr">// The Lab</div>
     <div class="lab-grid">
-      <a class="tile" href="https://magicdrop.ieving.com" target="_blank" rel="noopener">
+      <a class="tile" href="https://eving.app" target="_blank" rel="noopener">
         <div class="tile-num">01</div>
-        <div class="tile-title">MAGIC DROP</div>
-        <div class="tile-desc">Drop any text, files, or clipboard between your devices. Lives on iPhone, iPad, Android, DESKTOP, MAC, Linux. Auto-clears after 24h.</div>
+        <div class="tile-title">EVING</div>
+        <div class="tile-desc">Cross-platform sync. Your stuff, everywhere.</div>
+        <div class="tile-platforms">iPhone · iPad · Android · Windows · Mac · Linux</div>
         <div class="tile-foot">
           <span class="live">Live</span>
-          <span class="arrow">magicdrop.ieving.com →</span>
+          <span class="arrow">eving.app →</span>
         </div>
       </a>
     </div>
   </section>
 
-  <section class="sec contact" id="contact">
-    <div class="sec-hdr">// Get In Touch</div>
-    <div class="contact-row">
-      <a href="mailto:ev@ieving.com">ev@ieving.com</a>
-    </div>
-  </section>
-
   <footer>
-    <div>EVING // Lab // MMXXVI</div>
-    <div>All systems nominal</div>
+    <div>Designed in Ashdod. For everyone in between.</div>
+    <div><a href="mailto:ev@ieving.com">ev@ieving.com</a></div>
   </footer>
 
 </div>
