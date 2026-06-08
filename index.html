@@ -60,7 +60,10 @@ a:hover{color:var(--ac)}
 .menu-close{position:absolute;top:max(env(safe-area-inset-top),24px);right:clamp(20px,5vw,64px);font-family:var(--mono);font-size:14px;letter-spacing:0.18em;background:none;border:none;color:var(--fg);cursor:pointer;text-transform:uppercase}
 .menu-close:hover{color:var(--ac)}
 .menu-nav{display:flex;flex-direction:column;max-width:1280px;margin:0 auto;width:100%}
-.menu-nav .menu-link{font-family:var(--sans);font-weight:800;font-size:clamp(28px,5vw,52px);letter-spacing:-0.02em;text-transform:uppercase;padding:6px 0;line-height:1.05}
+.menu-nav .menu-link{align-self:flex-start;display:inline-flex;align-items:center;gap:14px;font-family:var(--sans);font-weight:800;font-size:clamp(20px,3.4vw,34px);letter-spacing:-0.02em;text-transform:uppercase;line-height:1;color:var(--fg);background:#121212;border:1px solid var(--line);border-radius:2px;padding:14px 26px;margin:6px 0;transition:border-color .25s ease,box-shadow .25s ease,transform .2s ease}
+.menu-nav .menu-link:hover{color:var(--fg);border-color:rgba(197,255,63,0.45);box-shadow:0 0 28px rgba(197,255,63,0.07);transform:translateY(-2px)}
+.menu-nav .menu-arrow{transition:transform .2s ease,color .2s ease;color:var(--dim);font-weight:400}
+.menu-nav .menu-link:hover .menu-arrow{color:var(--ac);transform:translateX(6px)}
 .menu-nav .menu-label{font-family:var(--mono);font-size:11px;letter-spacing:0.22em;color:var(--dim);text-transform:uppercase;padding:6px 0 4px}
 .menu-nav .menu-sub{font-family:var(--sans);font-weight:600;font-size:clamp(16px,2.4vw,22px);letter-spacing:-0.01em;color:var(--fg);padding:4px 0 4px 18px}
 .menu-nav .menu-sub span{color:var(--dim);font-family:var(--mono);font-weight:400;font-size:13px;letter-spacing:0.02em}
@@ -182,14 +185,14 @@ footer a:hover{color:var(--ac)}
 <div class="menu-overlay" id="menu" aria-hidden="true">
   <button class="menu-close" aria-label="Close menu">Close ✕</button>
   <nav class="menu-nav">
-    <a class="menu-link" href="/">Home</a>
+    <a class="menu-link" href="/">Home <span class="menu-arrow">→</span></a>
     <hr class="menu-divider">
     <div class="menu-label">Products</div>
     <a class="menu-sub" href="/construction"><span translate="no">EVING</span> Construction <span>· for your projects</span></a>
     <a class="menu-sub" href="https://app.eving.app"><span translate="no">EVING</span> <span>· for your daily life</span></a>
     <hr class="menu-divider">
-    <a class="menu-link" href="#about">About</a>
-    <a class="menu-link" href="mailto:ev@ieving.com">Contact</a>
+    <a class="menu-link" href="#about">About <span class="menu-arrow">→</span></a>
+    <a class="menu-link" href="mailto:ev@ieving.com">Contact <span class="menu-arrow">→</span></a>
     <hr class="menu-divider">
     <div class="menu-meta">Legal · Privacy</div>
   </nav>
@@ -206,7 +209,6 @@ footer a:hover{color:var(--ac)}
 
   <section class="hero">
     <h1 translate="no">Eving<span class="tm-mark">™</span> Lab<span class="dot">.</span></h1>
-    <div class="tagline">Ping different<span class="dot">.</span></div>
   </section>
 
   <section class="sec" id="products">

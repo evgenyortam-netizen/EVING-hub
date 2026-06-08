@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>EVING Construction — Solution for real time construction</title>
+<title>EVING Construction — Real time management solution</title>
 <meta name="description" content="EVING Construction — connecting the construction site and office in real time. Drawings, acts, photos in one place.">
 <meta name="theme-color" content="#0A0A0A">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ieving.com/construction">
-<meta property="og:title" content="EVING Construction — Solution for real time construction">
+<meta property="og:title" content="EVING Construction — Real time management solution">
 <meta property="og:description" content="Connecting the construction site and office in real time.">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="EVING Construction">
-<meta name="twitter:description" content="Solution for real time construction.">
+<meta name="twitter:description" content="Real time management solution.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230A0A0A'/%3E%3Ctext x='50' y='66' font-family='system-ui' font-weight='900' font-size='56' fill='%23fff' text-anchor='middle'%3EE%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,7 +52,10 @@ a:hover{color:var(--ac)}
 .menu-close{position:absolute;top:max(env(safe-area-inset-top),24px);right:clamp(20px,5vw,64px);font-family:var(--mono);font-size:14px;letter-spacing:0.18em;background:none;border:none;color:var(--fg);cursor:pointer;text-transform:uppercase}
 .menu-close:hover{color:var(--ac)}
 .menu-nav{display:flex;flex-direction:column;max-width:1280px;margin:0 auto;width:100%}
-.menu-nav .menu-link{font-family:var(--sans);font-weight:800;font-size:clamp(28px,5vw,52px);letter-spacing:-0.02em;text-transform:uppercase;padding:6px 0;line-height:1.05}
+.menu-nav .menu-link{align-self:flex-start;display:inline-flex;align-items:center;gap:14px;font-family:var(--sans);font-weight:800;font-size:clamp(20px,3.4vw,34px);letter-spacing:-0.02em;text-transform:uppercase;line-height:1;color:var(--fg);background:#121212;border:1px solid var(--line);border-radius:2px;padding:14px 26px;margin:6px 0;transition:border-color .25s ease,box-shadow .25s ease,transform .2s ease}
+.menu-nav .menu-link:hover{color:var(--fg);border-color:rgba(197,255,63,0.45);box-shadow:0 0 28px rgba(197,255,63,0.07);transform:translateY(-2px)}
+.menu-nav .menu-arrow{transition:transform .2s ease,color .2s ease;color:var(--dim);font-weight:400}
+.menu-nav .menu-link:hover .menu-arrow{color:var(--ac);transform:translateX(6px)}
 .menu-nav .menu-label{font-family:var(--mono);font-size:11px;letter-spacing:0.22em;color:var(--dim);text-transform:uppercase;padding:6px 0 4px}
 .menu-nav .menu-sub{font-family:var(--sans);font-weight:600;font-size:clamp(16px,2.4vw,22px);letter-spacing:-0.01em;color:var(--fg);padding:4px 0 4px 18px}
 .menu-nav .menu-sub span{color:var(--dim);font-family:var(--mono);font-weight:400;font-size:13px;letter-spacing:0.02em}
@@ -73,8 +76,10 @@ a:hover{color:var(--ac)}
 
 /* CTA */
 .cta-block{padding:clamp(64px,10vw,140px) 0;display:flex;flex-direction:column;align-items:flex-start;gap:20px}
-.cta-btn{font-family:var(--sans);font-weight:800;font-size:clamp(20px,3vw,32px);letter-spacing:-0.01em;color:#0A0A0A;background:var(--ac);padding:18px 36px;border-radius:2px;text-transform:uppercase;display:inline-flex;align-items:center;gap:14px;transition:transform .2s ease,box-shadow .2s ease}
-.cta-btn:hover{color:#0A0A0A;transform:translateY(-2px);box-shadow:0 14px 34px rgba(197,255,63,0.25)}
+.cta-btn{font-family:var(--sans);font-weight:800;font-size:clamp(18px,2.6vw,28px);letter-spacing:-0.01em;color:var(--fg);background:#121212;border:1px solid var(--line);padding:18px 32px;border-radius:2px;text-transform:uppercase;display:inline-flex;align-items:center;gap:14px;transition:border-color .25s ease,box-shadow .25s ease,transform .2s ease}
+.cta-btn:hover{color:var(--fg);border-color:rgba(197,255,63,0.45);box-shadow:0 0 28px rgba(197,255,63,0.07);transform:translateY(-2px)}
+.cta-arrow{transition:transform .2s ease,color .2s ease}
+.cta-btn:hover .cta-arrow{color:var(--ac);transform:translateX(6px)}
 .cta-note{font-family:var(--mono);font-size:13px;color:var(--dim);letter-spacing:0.04em}
 
 /* Footer */
@@ -88,14 +93,14 @@ footer a:hover{color:var(--ac)}
 <div class="menu-overlay" id="menu" aria-hidden="true">
   <button class="menu-close" aria-label="Close menu">Close ✕</button>
   <nav class="menu-nav">
-    <a class="menu-link" href="/">Home</a>
+    <a class="menu-link" href="/">Home <span class="menu-arrow">→</span></a>
     <hr class="menu-divider">
     <div class="menu-label">Products</div>
     <a class="menu-sub" href="/construction"><span translate="no">EVING</span> Construction <span>· for your projects</span></a>
     <a class="menu-sub" href="https://app.eving.app"><span translate="no">EVING</span> <span>· for your daily life</span></a>
     <hr class="menu-divider">
-    <a class="menu-link" href="/#about">About</a>
-    <a class="menu-link" href="mailto:ev@ieving.com">Contact</a>
+    <a class="menu-link" href="/#about">About <span class="menu-arrow">→</span></a>
+    <a class="menu-link" href="mailto:ev@ieving.com">Contact <span class="menu-arrow">→</span></a>
     <hr class="menu-divider">
     <div class="menu-meta">Legal · Privacy</div>
   </nav>
@@ -112,7 +117,7 @@ footer a:hover{color:var(--ac)}
 
   <section class="c-hero">
     <h1><span translate="no">EVING</span><span class="tm-mark">™</span> Construction</h1>
-    <div class="c-tag">Solution for real time construction.</div>
+    <div class="c-tag">Real time management solution.</div>
   </section>
 
   <section class="sec">
@@ -136,7 +141,7 @@ footer a:hover{color:var(--ac)}
   </section>
 
   <section class="cta-block">
-    <a class="cta-btn" href="mailto:ev@ieving.com?subject=EVING%20Construction%20%E2%80%94%20pilot%20request">Request a pilot →</a>
+    <a class="cta-btn" href="mailto:ev@ieving.com?subject=EVING%20Construction%20%E2%80%94%20pilot%20request">Request a pilot <span class="cta-arrow">→</span></a>
     <div class="cta-note">3 months free for pilot companies.</div>
   </section>
 
