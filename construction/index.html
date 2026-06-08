@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>EVING Construction — Solution for real time construction</title>
+<meta name="description" content="EVING Construction — connecting the construction site and office in real time. Drawings, acts, photos in one place.">
+<meta name="theme-color" content="#0A0A0A">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ieving.com/construction">
+<meta property="og:title" content="EVING Construction — Solution for real time construction">
+<meta property="og:description" content="Connecting the construction site and office in real time.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="EVING Construction">
+<meta name="twitter:description" content="Solution for real time construction.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230A0A0A'/%3E%3Ctext x='50' y='66' font-family='system-ui' font-weight='900' font-size='56' fill='%23fff' text-anchor='middle'%3EE%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Syne:wght@600;800;900&family=DM+Mono:wght@300;400;500&family=Caveat:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A0A0A;
+  --fg:#FFFFFF;
+  --dim:rgba(255,255,255,0.45);
+  --line:rgba(255,255,255,0.08);
+  --line-strong:rgba(255,255,255,0.18);
+  --ac:#C5FF3F;
+  --sans:'Syne',system-ui,sans-serif;
+  --logo:'Archivo Black','Syne',system-ui,sans-serif;
+  --mono:'DM Mono',ui-monospace,monospace;
+}
+.tm-mark{font-family:var(--mono);font-weight:400;font-size:0.4em;vertical-align:super;letter-spacing:0;margin-left:0.06em}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--fg);font-family:var(--mono);font-weight:400;-webkit-font-smoothing:antialiased}
+body{min-height:100dvh;overflow-x:hidden;padding:max(env(safe-area-inset-top),24px) clamp(20px,5vw,64px) max(env(safe-area-inset-bottom),24px)}
+a{color:inherit;text-decoration:none;transition:color .15s ease}
+a:hover{color:var(--ac)}
+
+.wrap{max-width:1280px;margin:0 auto}
+
+.ieving-signature{font-family:'Caveat',cursive;font-weight:700;color:var(--fg);line-height:1;display:inline-block}
+.ieving-signature.in-header{font-size:28px}
+
+/* Site header (no intro animation on inner pages) */
+.site-header{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px 0;margin-bottom:clamp(48px,8vw,96px);border-bottom:1px solid var(--line);background:rgba(10,10,10,0.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.menu-trigger{font-family:var(--mono);font-size:14px;letter-spacing:0.18em;color:var(--fg);background:none;border:none;cursor:pointer;text-transform:uppercase;padding:4px 0}
+.menu-trigger:hover{color:var(--ac)}
+
+/* Menu overlay */
+.menu-overlay{position:fixed;inset:0;z-index:90;background:rgba(10,10,10,0.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;flex-direction:column;justify-content:center;padding:clamp(40px,8vw,80px) clamp(20px,5vw,64px);opacity:0;visibility:hidden;transition:opacity .25s ease,visibility .25s ease}
+.menu-overlay.open{opacity:1;visibility:visible}
+.menu-close{position:absolute;top:max(env(safe-area-inset-top),24px);right:clamp(20px,5vw,64px);font-family:var(--mono);font-size:14px;letter-spacing:0.18em;background:none;border:none;color:var(--fg);cursor:pointer;text-transform:uppercase}
+.menu-close:hover{color:var(--ac)}
+.menu-nav{display:flex;flex-direction:column;max-width:1280px;margin:0 auto;width:100%}
+.menu-nav .menu-link{font-family:var(--sans);font-weight:800;font-size:clamp(28px,5vw,52px);letter-spacing:-0.02em;text-transform:uppercase;padding:6px 0;line-height:1.05}
+.menu-nav .menu-label{font-family:var(--mono);font-size:11px;letter-spacing:0.22em;color:var(--dim);text-transform:uppercase;padding:6px 0 4px}
+.menu-nav .menu-sub{font-family:var(--sans);font-weight:600;font-size:clamp(16px,2.4vw,22px);letter-spacing:-0.01em;color:var(--fg);padding:4px 0 4px 18px}
+.menu-nav .menu-sub span{color:var(--dim);font-family:var(--mono);font-weight:400;font-size:13px;letter-spacing:0.02em}
+.menu-divider{height:1px;background:var(--line);border:none;margin:18px 0}
+.menu-meta{font-family:var(--mono);font-size:11px;letter-spacing:0.22em;color:var(--dim);text-transform:uppercase;margin-top:8px}
+
+/* Hero */
+.c-hero{padding:clamp(40px,8vw,120px) 0 clamp(56px,9vw,120px);border-bottom:1px solid var(--line)}
+.c-hero h1{font-family:var(--logo);font-weight:400;font-size:clamp(40px,8vw,104px);line-height:0.95;letter-spacing:-0.02em;text-transform:uppercase}
+.c-hero .c-tag{font-family:var(--sans);font-weight:600;font-size:clamp(16px,2.6vw,26px);color:var(--dim);margin-top:clamp(20px,3vw,32px);letter-spacing:-0.01em;max-width:620px}
+
+/* Content sections */
+.sec{padding:clamp(56px,9vw,120px) 0;border-bottom:1px solid var(--line)}
+.sec-hdr{font-family:var(--mono);font-size:11px;letter-spacing:0.22em;color:var(--dim);text-transform:uppercase;margin-bottom:clamp(28px,4vw,48px)}
+.c-list{list-style:none;display:flex;flex-direction:column;gap:clamp(12px,1.8vw,18px)}
+.c-list li{font-family:var(--mono);font-size:clamp(15px,2.1vw,20px);line-height:1.45;color:var(--fg);display:flex;gap:14px}
+.c-list li::before{content:"—";color:var(--ac);flex:none}
+
+/* CTA */
+.cta-block{padding:clamp(64px,10vw,140px) 0;display:flex;flex-direction:column;align-items:flex-start;gap:20px}
+.cta-btn{font-family:var(--sans);font-weight:800;font-size:clamp(20px,3vw,32px);letter-spacing:-0.01em;color:#0A0A0A;background:var(--ac);padding:18px 36px;border-radius:2px;text-transform:uppercase;display:inline-flex;align-items:center;gap:14px;transition:transform .2s ease,box-shadow .2s ease}
+.cta-btn:hover{color:#0A0A0A;transform:translateY(-2px);box-shadow:0 14px 34px rgba(197,255,63,0.25)}
+.cta-note{font-family:var(--mono);font-size:13px;color:var(--dim);letter-spacing:0.04em}
+
+/* Footer */
+footer{padding:clamp(72px,11vw,130px) 0 8px;display:flex;flex-direction:column;gap:10px;align-items:flex-start;font-family:var(--mono);font-size:11px;letter-spacing:0.18em;color:var(--dim);text-transform:uppercase}
+footer a{color:var(--dim)}
+footer a:hover{color:var(--ac)}
+</style>
+</head>
+<body>
+
+<div class="menu-overlay" id="menu" aria-hidden="true">
+  <button class="menu-close" aria-label="Close menu">Close ✕</button>
+  <nav class="menu-nav">
+    <a class="menu-link" href="/">Home</a>
+    <hr class="menu-divider">
+    <div class="menu-label">Products</div>
+    <a class="menu-sub" href="/construction"><span translate="no">EVING</span> Construction <span>· for your projects</span></a>
+    <a class="menu-sub" href="https://app.eving.app"><span translate="no">EVING</span> <span>· for your daily life</span></a>
+    <hr class="menu-divider">
+    <a class="menu-link" href="/#about">About</a>
+    <a class="menu-link" href="mailto:ev@ieving.com">Contact</a>
+    <hr class="menu-divider">
+    <div class="menu-meta">Legal · Privacy</div>
+  </nav>
+</div>
+
+<div class="wrap">
+
+  <header class="site-header">
+    <a href="/" class="ieving-signature in-header" translate="no" aria-label="ieving — home">ieving</a>
+    <nav class="site-menu">
+      <button class="menu-trigger" aria-haspopup="true" aria-controls="menu">Menu</button>
+    </nav>
+  </header>
+
+  <section class="c-hero">
+    <h1><span translate="no">EVING</span><span class="tm-mark">™</span> Construction</h1>
+    <div class="c-tag">Solution for real time construction.</div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-hdr">// What it does</div>
+    <ul class="c-list">
+      <li>Connecting the construction site and office in real time</li>
+      <li>Drawings, acts, photos in one place</li>
+      <li>Roles for every project participant</li>
+      <li>Mobile-first for work on site</li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <div class="sec-hdr">// For</div>
+    <ul class="c-list">
+      <li>Developers</li>
+      <li>Contractors</li>
+      <li>Designers</li>
+      <li>Site supervisors</li>
+    </ul>
+  </section>
+
+  <section class="cta-block">
+    <a class="cta-btn" href="mailto:ev@ieving.com?subject=EVING%20Construction%20%E2%80%94%20pilot%20request">Request a pilot →</a>
+    <div class="cta-note">3 months free for pilot companies.</div>
+  </section>
+
+  <footer>
+    <div><a href="mailto:ev@ieving.com">ev@ieving.com</a></div>
+    <div>Legal · Privacy · Terms</div>
+    <div>© 2026 <span translate="no">ieving</span></div>
+  </footer>
+
+</div>
+
+<script>
+  // Menu overlay.
+  (function(){
+    var trigger = document.querySelector('.menu-trigger');
+    var overlay = document.getElementById('menu');
+    var closeBtn = overlay && overlay.querySelector('.menu-close');
+    if (!trigger || !overlay) return;
+    var open = function(){ overlay.classList.add('open'); document.body.style.overflow = 'hidden'; };
+    var close = function(){ overlay.classList.remove('open'); document.body.style.overflow = ''; };
+    trigger.addEventListener('click', open);
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    overlay.addEventListener('click', function(e){ if (e.target === overlay) close(); });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
+    overlay.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', close); });
+  })();
+</script>
+</body>
+</html>

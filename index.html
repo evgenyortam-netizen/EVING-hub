@@ -16,7 +16,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230A0A0A'/%3E%3Ctext x='50' y='66' font-family='system-ui' font-weight='900' font-size='56' fill='%23fff' text-anchor='middle'%3EE%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Syne:wght@600;800;900&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Syne:wght@600;800;900&family=DM+Mono:wght@300;400;500&family=Caveat:wght@700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#0A0A0A;
@@ -39,11 +39,33 @@ a:hover{color:var(--ac)}
 
 .wrap{max-width:1280px;margin:0 auto}
 
-/* Header */
-header{display:flex;align-items:center;justify-content:space-between;padding:8px 0 96px}
-.brand{font-family:var(--logo);font-weight:400;font-size:22px;letter-spacing:-0.01em;line-height:1}
-.brand .dot{color:var(--ac)}
-.tag{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;color:var(--dim);text-transform:uppercase}
+/* ieving handwritten signature — reusable placeholder (Caveat 700; later swapped for an <svg> with the same class) */
+.ieving-signature{font-family:'Caveat',cursive;font-weight:700;color:var(--fg);line-height:1;display:inline-block}
+.ieving-signature.in-header{font-size:28px}
+
+/* Intro overlay — pen-signature on first visit, then slides up to reveal the header */
+.intro{position:fixed;inset:0;z-index:100;background:var(--bg);display:flex;align-items:center;justify-content:center;animation:intro-out .8s ease-in 1.7s forwards}
+.intro .ieving-signature{font-size:clamp(56px,12vw,96px);opacity:0;transform:scale(0.95);animation:signature-appear 1.2s ease-out forwards}
+@keyframes signature-appear{to{opacity:1;transform:scale(1)}}
+@keyframes intro-out{to{opacity:0;transform:translateY(-48px);visibility:hidden}}
+
+/* Site header */
+.site-header{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px 0;margin-bottom:clamp(48px,8vw,96px);border-bottom:1px solid var(--line);background:rgba(10,10,10,0.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.menu-trigger{font-family:var(--mono);font-size:14px;letter-spacing:0.18em;color:var(--fg);background:none;border:none;cursor:pointer;text-transform:uppercase;padding:4px 0}
+.menu-trigger:hover{color:var(--ac)}
+
+/* Menu overlay */
+.menu-overlay{position:fixed;inset:0;z-index:90;background:rgba(10,10,10,0.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;flex-direction:column;justify-content:center;padding:clamp(40px,8vw,80px) clamp(20px,5vw,64px);opacity:0;visibility:hidden;transition:opacity .25s ease,visibility .25s ease}
+.menu-overlay.open{opacity:1;visibility:visible}
+.menu-close{position:absolute;top:max(env(safe-area-inset-top),24px);right:clamp(20px,5vw,64px);font-family:var(--mono);font-size:14px;letter-spacing:0.18em;background:none;border:none;color:var(--fg);cursor:pointer;text-transform:uppercase}
+.menu-close:hover{color:var(--ac)}
+.menu-nav{display:flex;flex-direction:column;max-width:1280px;margin:0 auto;width:100%}
+.menu-nav .menu-link{font-family:var(--sans);font-weight:800;font-size:clamp(28px,5vw,52px);letter-spacing:-0.02em;text-transform:uppercase;padding:6px 0;line-height:1.05}
+.menu-nav .menu-label{font-family:var(--mono);font-size:11px;letter-spacing:0.22em;color:var(--dim);text-transform:uppercase;padding:6px 0 4px}
+.menu-nav .menu-sub{font-family:var(--sans);font-weight:600;font-size:clamp(16px,2.4vw,22px);letter-spacing:-0.01em;color:var(--fg);padding:4px 0 4px 18px}
+.menu-nav .menu-sub span{color:var(--dim);font-family:var(--mono);font-weight:400;font-size:13px;letter-spacing:0.02em}
+.menu-divider{height:1px;background:var(--line);border:none;margin:18px 0}
+.menu-meta{font-family:var(--mono);font-size:11px;letter-spacing:0.22em;color:var(--dim);text-transform:uppercase;margin-top:8px}
 
 /* Hero */
 .hero{padding:clamp(40px,8vw,120px) 0 clamp(80px,12vw,160px);border-bottom:1px solid var(--line)}
@@ -58,8 +80,15 @@ header{display:flex;align-items:center;justify-content:space-between;padding:8px
 .sec{padding:clamp(64px,10vw,140px) 0;border-bottom:1px solid var(--line)}
 .sec-hdr{font-family:var(--mono);font-size:11px;letter-spacing:0.22em;color:var(--dim);text-transform:uppercase;margin-bottom:clamp(32px,5vw,56px)}
 
-/* Lab: single tile */
-.lab-grid{display:grid;grid-template-columns:1fr;gap:24px;perspective:1400px}
+/* Product cards — two umbrella columns. Reuse the .tile look from the original Lab card. */
+.product-cards{display:grid;grid-template-columns:1fr;gap:clamp(24px,4vw,40px)}
+@media(min-width:768px){.product-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.card-column{display:flex;flex-direction:column}
+.column-label{font-family:var(--mono);font-size:11px;letter-spacing:0.22em;color:var(--dim);text-transform:uppercase;margin-bottom:18px}
+.product-cards .tile-title{font-size:clamp(28px,3.6vw,46px);margin-top:0;overflow-wrap:anywhere}
+.product-cards .tile{min-height:clamp(260px,32vw,360px)}
+
+/* Lab: tile (original loved card — reused for the product cards) */
 .tile{
   position:relative;
   display:block;
@@ -129,7 +158,8 @@ header{display:flex;align-items:center;justify-content:space-between;padding:8px
 .arrow{transition:transform .2s ease}
 .tile:hover .arrow{transform:translateX(6px);color:var(--ac)}
 
-/* Manifesto */
+/* Manifesto — small centred mark. (Original .manifesto p rule kept below for the long-form variant.) */
+.manifesto{font-family:var(--mono);font-size:14px;letter-spacing:0.22em;color:var(--dim);text-align:center;text-transform:lowercase;padding:clamp(56px,9vw,110px) 0}
 .manifesto p{font-family:var(--sans);font-weight:600;font-size:clamp(22px,3.4vw,40px);line-height:1.25;letter-spacing:-0.01em;max-width:880px}
 .manifesto p + p{margin-top:24px;color:var(--dim)}
 
@@ -139,17 +169,39 @@ footer a{color:var(--dim)}
 footer a:hover{color:var(--ac)}
 
 @media (max-width:640px){
-  header{padding-bottom:64px}
   .tile-foot{position:static;margin-top:32px;left:auto;right:auto;bottom:auto}
 }
 </style>
 </head>
 <body>
+
+<div class="intro" aria-hidden="true">
+  <div class="ieving-signature" translate="no">ieving</div>
+</div>
+
+<div class="menu-overlay" id="menu" aria-hidden="true">
+  <button class="menu-close" aria-label="Close menu">Close ✕</button>
+  <nav class="menu-nav">
+    <a class="menu-link" href="/">Home</a>
+    <hr class="menu-divider">
+    <div class="menu-label">Products</div>
+    <a class="menu-sub" href="/construction"><span translate="no">EVING</span> Construction <span>· for your projects</span></a>
+    <a class="menu-sub" href="https://app.eving.app"><span translate="no">EVING</span> <span>· for your daily life</span></a>
+    <hr class="menu-divider">
+    <a class="menu-link" href="#about">About</a>
+    <a class="menu-link" href="mailto:ev@ieving.com">Contact</a>
+    <hr class="menu-divider">
+    <div class="menu-meta">Legal · Privacy</div>
+  </nav>
+</div>
+
 <div class="wrap">
 
-  <header>
-    <div class="brand" translate="no">EVING<span class="tm-mark">™</span></div>
-    <div class="tag">Lab // 2026</div>
+  <header class="site-header">
+    <a href="/" class="ieving-signature in-header" translate="no" aria-label="ieving — home">ieving</a>
+    <nav class="site-menu">
+      <button class="menu-trigger" aria-haspopup="true" aria-controls="menu">Menu</button>
+    </nav>
   </header>
 
   <section class="hero">
@@ -157,28 +209,77 @@ footer a:hover{color:var(--ac)}
     <div class="tagline">Ping different<span class="dot">.</span></div>
   </section>
 
-  <section class="sec lab" id="lab">
-    <div class="sec-hdr">// The Lab</div>
-    <div class="lab-grid">
-      <a class="tile" href="https://app.eving.app" target="_blank" rel="noopener">
-        <div class="tile-num">01</div>
-        <div class="tile-title" translate="no">Eving<span class="tm-mark">™</span></div>
-        <div class="tile-desc">Cross-platform sync. Your stuff, everywhere.</div>
-        <div class="tile-platforms">Android · iPhone · iPad · Mac · Windows · Linux</div>
-        <div class="tile-foot">
-          <span class="live">Live</span>
-          <span class="arrow">eving.app →</span>
-        </div>
-      </a>
+  <section class="sec" id="products">
+    <div class="product-cards">
+      <div class="card-column">
+        <div class="column-label">For your projects</div>
+        <a class="tile" href="/construction">
+          <div class="tile-title"><span translate="no">EVING</span><span class="tm-mark">™</span> Construction</div>
+          <div class="tile-desc">Project management for construction teams.</div>
+          <div class="tile-foot">
+            <span></span>
+            <span class="arrow">Explore →</span>
+          </div>
+        </a>
+      </div>
+      <div class="card-column">
+        <div class="column-label">For your daily life</div>
+        <a class="tile" href="https://app.eving.app" target="_blank" rel="noopener">
+          <div class="tile-title"><span translate="no">EVING</span><span class="tm-mark">™</span></div>
+          <div class="tile-desc">Space for personal sync &amp; notes.</div>
+          <div class="tile-foot">
+            <span class="live">Live</span>
+            <span class="arrow">Try it →</span>
+          </div>
+        </a>
+      </div>
     </div>
   </section>
+
+  <div class="manifesto"><span translate="no">eving</span> lab</div>
 
   <footer>
     <div><a href="mailto:ev@ieving.com">ev@ieving.com</a></div>
   </footer>
 
 </div>
+
 <script>
+  // Intro pen-signature: play once per session, skippable.
+  (function(){
+    var body = document.body;
+    var intro = document.querySelector('.intro');
+    if (!intro) return;
+    if (sessionStorage.getItem('intro-shown')) {
+      intro.remove();
+    } else {
+      sessionStorage.setItem('intro-shown', 'true');
+      intro.addEventListener('animationend', function(e){
+        if (e.animationName === 'intro-out') intro.remove();
+      });
+      var skip = function(){ if (intro && intro.parentNode) intro.remove(); };
+      ['click','touchstart','keydown'].forEach(function(ev){
+        document.addEventListener(ev, skip, { once:true });
+      });
+    }
+  })();
+
+  // Menu overlay.
+  (function(){
+    var trigger = document.querySelector('.menu-trigger');
+    var overlay = document.getElementById('menu');
+    var closeBtn = overlay && overlay.querySelector('.menu-close');
+    if (!trigger || !overlay) return;
+    var open = function(){ overlay.classList.add('open'); body.style.overflow = 'hidden'; };
+    var close = function(){ overlay.classList.remove('open'); document.body.style.overflow = ''; };
+    var body = document.body;
+    trigger.addEventListener('click', open);
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    overlay.addEventListener('click', function(e){ if (e.target === overlay) close(); });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
+    overlay.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', close); });
+  })();
+
   // Touch devices: first tap arms (lime preview), second tap opens link.
   if (window.matchMedia && window.matchMedia('(hover: none)').matches) {
     document.querySelectorAll('.tile').forEach(function(tile){
