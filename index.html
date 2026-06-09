@@ -16,7 +16,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230A0A0A'/%3E%3Ctext x='50' y='66' font-family='system-ui' font-weight='900' font-size='56' fill='%23fff' text-anchor='middle'%3EE%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Syne:wght@600;800;900&family=DM+Mono:wght@300;400;500&family=Caveat:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Syne:wght@600;800;900&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#0A0A0A;
@@ -39,14 +39,14 @@ a:hover{color:var(--ac)}
 
 .wrap{max-width:1280px;margin:0 auto}
 
-/* ieving handwritten signature — reusable placeholder (Caveat 700; later swapped for an <svg> with the same class) */
-.ieving-signature{font-family:'Caveat',cursive;font-weight:700;color:var(--fg);line-height:1;display:inline-block}
-.ieving-signature.in-header{font-size:28px}
+/* ieving handwritten signature — white-on-transparent PNG (assets/ieving.png) */
+.ieving-signature{display:block;height:auto}
+.ieving-signature.in-header{width:auto;height:26px}
 
-/* Intro overlay — pen-signature on first visit, then slides up to reveal the header */
-.intro{position:fixed;inset:0;z-index:100;background:var(--bg);display:flex;align-items:center;justify-content:center;animation:intro-out .8s ease-in 1.7s forwards}
-.intro .ieving-signature{font-size:clamp(56px,12vw,96px);opacity:0;transform:scale(0.95);animation:signature-appear 1.2s ease-out forwards}
-@keyframes signature-appear{to{opacity:1;transform:scale(1)}}
+/* Intro overlay — signature fades up on first visit, then slides up to reveal the header */
+.intro{position:fixed;inset:0;z-index:100;background:var(--bg);display:flex;align-items:center;justify-content:center;animation:intro-out .8s ease-in 2s forwards}
+.intro .ieving-signature{width:min(60vw,420px);opacity:0;transform:translateY(8px);animation:sigIn 1.4s ease-out .3s forwards}
+@keyframes sigIn{to{opacity:1;transform:translateY(0)}}
 @keyframes intro-out{to{opacity:0;transform:translateY(-48px);visibility:hidden}}
 
 /* Site header */
@@ -179,7 +179,7 @@ footer a:hover{color:var(--ac)}
 <body>
 
 <div class="intro" aria-hidden="true">
-  <div class="ieving-signature" translate="no">ieving</div>
+  <img class="ieving-signature" src="/assets/ieving.png" alt="ieving" width="420" height="276">
 </div>
 
 <div class="menu-overlay" id="menu" aria-hidden="true">
@@ -201,7 +201,7 @@ footer a:hover{color:var(--ac)}
 <div class="wrap">
 
   <header class="site-header">
-    <a href="/" class="ieving-signature in-header" translate="no" aria-label="ieving — home">ieving</a>
+    <a href="/" class="site-brand" aria-label="ieving — home"><img class="ieving-signature in-header" src="/assets/ieving.png" alt="ieving" width="420" height="276"></a>
     <nav class="site-menu">
       <button class="menu-trigger" aria-haspopup="true" aria-controls="menu">Menu</button>
     </nav>
