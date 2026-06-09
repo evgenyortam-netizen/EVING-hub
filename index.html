@@ -42,6 +42,7 @@ a:hover{color:var(--ac)}
 /* ieving handwritten signature — white-on-transparent PNG (assets/ieving.png) */
 .ieving-signature{display:block;height:auto}
 .ieving-signature.in-header{width:auto;height:33px}
+@media(min-width:768px){.ieving-signature.in-header{height:50px}}
 
 /* Intro overlay — signature fades up on first visit, then slides up to reveal the header */
 .intro{position:fixed;inset:0;z-index:100;background:var(--bg);display:flex;align-items:center;justify-content:center;animation:intro-out .8s ease-in 2s forwards}
