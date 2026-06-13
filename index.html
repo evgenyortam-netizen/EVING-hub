@@ -85,8 +85,7 @@ a:hover{color:var(--ac)}
 .sec-hdr{font-family:var(--mono);font-size:11px;letter-spacing:0.22em;color:var(--dim);text-transform:uppercase;margin-bottom:clamp(32px,5vw,56px)}
 
 /* Product cards — two umbrella columns. Reuse the .tile look from the original Lab card. */
-.product-cards{display:grid;grid-template-columns:1fr;gap:clamp(24px,4vw,40px)}
-@media(min-width:768px){.product-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.product-cards{display:grid;grid-template-columns:1fr;gap:clamp(24px,4vw,40px);max-width:560px}
 .card-column{display:flex;flex-direction:column}
 .column-label{font-family:var(--mono);font-size:11px;letter-spacing:0.22em;color:var(--dim);text-transform:uppercase;margin-bottom:18px}
 .product-cards .tile-title{font-size:clamp(28px,3.6vw,46px);margin-top:0;overflow-wrap:anywhere}
@@ -189,7 +188,6 @@ footer a:hover{color:var(--ac)}
     <a class="menu-link" href="/">Home <span class="menu-arrow">→</span></a>
     <hr class="menu-divider">
     <div class="menu-label">Products</div>
-    <a class="menu-sub" href="/construction"><span translate="no">EVING</span> Construction <span>· for your projects</span></a>
     <a class="menu-sub" href="https://app.eving.app"><span translate="no">EVING</span> <span>· for your daily life</span></a>
     <hr class="menu-divider">
     <a class="menu-link" href="#about">About <span class="menu-arrow">→</span></a>
@@ -214,17 +212,6 @@ footer a:hover{color:var(--ac)}
 
   <section class="sec" id="products">
     <div class="product-cards">
-      <div class="card-column">
-        <div class="column-label">For your projects</div>
-        <a class="tile" href="/construction">
-          <div class="tile-title"><span translate="no">EVING</span><span class="tm-mark">™</span> Construction</div>
-          <div class="tile-desc">Project management for construction teams.</div>
-          <div class="tile-foot">
-            <span></span>
-            <span class="arrow">Explore →</span>
-          </div>
-        </a>
-      </div>
       <div class="card-column">
         <div class="column-label">For your daily life</div>
         <a class="tile" href="https://app.eving.app" target="_blank" rel="noopener">
