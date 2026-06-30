@@ -229,14 +229,7 @@ footer a:hover{color:var(--ac)}
 @keyframes ed-pop{0%{opacity:0;transform:scale(.6)}60%{transform:scale(1.12)}100%{opacity:1;transform:scale(1)}}
 .ed-globe-wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px}
 .ed-globe{position:relative;width:170px;height:170px}
-.ed-globe .ring{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(255,255,255,.42);animation:ed-radiate 2.6s ease-out infinite}
-.ed-globe .ring:nth-child(2){animation-delay:.9s}
-.ed-globe .ring:nth-child(3){animation-delay:1.8s}
-@keyframes ed-radiate{0%{transform:scale(.55);opacity:.9}100%{transform:scale(1.25);opacity:0}}
-.ed-ball{position:absolute;inset:24px;border-radius:50%;background:radial-gradient(circle at 34% 30%,#1c1c1c,#0c0c0c);border:1px solid var(--line-strong);overflow:hidden}
-.ed-ball::before,.ed-ball::after{content:"";position:absolute;inset:0;border-radius:50%;border:1px solid rgba(255,255,255,.22)}
-.ed-ball::before{transform:scaleX(.45)}
-.ed-ball::after{transform:scaleY(.45)}
+.ed-earth{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:120px;height:120px;display:block;border-radius:50%;background:#050505}
 .ed-orbit{position:absolute;inset:0;animation:ed-spin 7s linear infinite}
 .ed-dot{position:absolute;top:-5px;left:50%;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--fg);box-shadow:0 0 10px rgba(255,255,255,.7)}
 .ed-orbit.b{animation-duration:5s;animation-direction:reverse}
@@ -359,8 +352,7 @@ footer a:hover{color:var(--ac)}
             <div class="ed-scene" data-scene="4">
               <div class="ed-globe-wrap">
                 <div class="ed-globe">
-                  <span class="ring"></span><span class="ring"></span><span class="ring"></span>
-                  <div class="ed-ball"></div>
+                  <canvas class="ed-earth" width="240" height="240"></canvas>
                   <div class="ed-orbit"><span class="ed-dot"></span></div>
                   <div class="ed-orbit b"><span class="ed-dot"></span></div>
                 </div>
@@ -483,6 +475,57 @@ footer a:hover{color:var(--ac)}
       }, { threshold: 0.25 }).observe(root);
     }
     go();
+  })();
+
+  // Rotating Earth (E3) inside the globe scene — same look as the app demo.
+  // Lazy-loads d3 + world map only when the section scrolls into view; the
+  // orbiting dots around it are pure CSS.
+  (function(){
+    var canvas = document.querySelector('.ed-earth');
+    if (!canvas) return;
+    var started = false;
+    function loadScript(src){
+      return new Promise(function(res, rej){
+        var s = document.createElement('script');
+        s.src = src; s.onload = res; s.onerror = rej;
+        document.head.appendChild(s);
+      });
+    }
+    function startEarth(){
+      if (started) return; started = true;
+      Promise.all([
+        loadScript('https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js'),
+        loadScript('https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js')
+      ]).then(function(){
+        return fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(function(r){ return r.json(); });
+      }).then(function(topo){
+        if (!window.d3 || !window.topojson) return;
+        var ctx = canvas.getContext('2d');
+        var dpr = Math.min(window.devicePixelRatio || 1, 2);
+        var SIZE = 120, W = Math.round(SIZE * dpr);
+        canvas.width = W; canvas.height = W;
+        canvas.style.width = SIZE + 'px'; canvas.style.height = SIZE + 'px';
+        var proj = d3.geoOrthographic().scale(W / 2 - dpr * 2).translate([W / 2, W / 2]).clipAngle(90);
+        var path = d3.geoPath(proj, ctx);
+        var land = topojson.feature(topo, topo.objects.countries);
+        var rot = 30;
+        function draw(){
+          proj.rotate([rot, -18]);
+          ctx.clearRect(0, 0, W, W);
+          ctx.beginPath(); path({ type: 'Sphere' }); ctx.fillStyle = '#050505'; ctx.fill();
+          ctx.beginPath(); path(land); ctx.fillStyle = '#d2d2d2'; ctx.fill();
+          ctx.beginPath(); path({ type: 'Sphere' }); ctx.strokeStyle = 'rgba(255,255,255,.5)'; ctx.lineWidth = 1.5 * dpr; ctx.stroke();
+          rot += 0.25;
+          requestAnimationFrame(draw);
+        }
+        draw();
+      }).catch(function(){ /* keep dark fallback */ });
+    }
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(entries){ if (entries[0].isIntersecting) startEarth(); }, { threshold: 0.1 }).observe(canvas);
+    } else {
+      startEarth();
+    }
   })();
 </script>
 </body>
