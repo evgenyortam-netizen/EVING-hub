@@ -176,6 +176,83 @@ footer a:hover{color:var(--ac)}
 @media (max-width:640px){
   .tile-foot{position:static;margin-top:32px;left:auto;right:auto;bottom:auto}
 }
+
+/* ===== HOW IT WORKS — live one-phone demo (DROP + SPACE) ===== */
+.how-head{max-width:560px;margin-bottom:clamp(36px,6vw,64px)}
+.how-head h2{font-family:var(--sans);font-weight:800;font-size:clamp(26px,4.2vw,46px);line-height:1.04;letter-spacing:-0.02em}
+.how-head h2 em{color:var(--fg);font-style:normal}
+.how-head p{margin-top:16px;font-size:13px;line-height:1.6;color:var(--dim);max-width:440px}
+
+.eving-demo{display:flex;flex-direction:column;align-items:center;gap:28px;font-family:var(--mono)}
+.ed-phone{position:relative;width:300px;height:620px;border-radius:42px;
+  background:linear-gradient(160deg,#1a1a1a,#0a0a0a);border:1px solid var(--line-strong);
+  box-shadow:0 0 0 1px rgba(255,255,255,.03),0 40px 80px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.06);padding:12px}
+.ed-notch{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:120px;height:26px;background:#000;border-radius:0 0 16px 16px;z-index:6}
+.ed-screen{position:relative;width:100%;height:100%;border-radius:32px;overflow:hidden;background:#0A0A0A;border:1px solid var(--line)}
+.ed-bar{position:absolute;top:0;left:0;right:0;height:96px;z-index:4;padding:40px 18px 0;display:flex;flex-direction:column;gap:12px;background:linear-gradient(#0a0a0a,#0a0a0a 70%,transparent)}
+.ed-bar-row{display:flex;align-items:center;justify-content:space-between}
+.ed-logo{font-family:var(--logo);font-size:15px;letter-spacing:.02em}
+.ed-logo .tm{font-family:var(--mono);font-weight:400;font-size:.42em;vertical-align:super;margin-left:.05em}
+.ed-time{font-size:11px;color:var(--dim);letter-spacing:.05em}
+.ed-tabs{display:flex;gap:22px;font-size:12px;letter-spacing:.18em;text-transform:uppercase}
+.ed-tab{position:relative;color:var(--dim);padding-bottom:6px;transition:color .4s}
+.ed-tab.on{color:var(--fg)}
+.ed-tab.on::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--ac);border-radius:2px}
+.ed-stage{position:absolute;top:96px;left:0;right:0;bottom:0}
+.ed-scene{position:absolute;inset:0;opacity:0;transition:opacity .5s ease,transform .5s ease;display:flex;flex-direction:column;padding:18px;pointer-events:none}
+.ed-scene.show{opacity:1}
+.ed-drop{flex:1;border:1.5px dashed var(--line-strong);border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:var(--dim)}
+.ed-drop .ed-arrow{width:46px;height:46px;border-radius:50%;border:1px solid var(--line-strong);display:grid;place-items:center;animation:ed-bob 1.8s ease-in-out infinite}
+@keyframes ed-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.ed-drop small{font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.ed-file{display:flex;align-items:center;gap:12px;padding:14px;border-radius:16px;background:#141414;border:1px solid var(--line)}
+.ed-file .ico{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;flex:0 0 auto;background:rgba(255,255,255,.08);color:var(--fg)}
+.ed-file .meta{min-width:0}
+.ed-file .nm{font-family:var(--sans);font-weight:700;font-size:14px;color:var(--fg)}
+.ed-file .sz{font-size:11px;color:var(--dim);margin-top:2px;letter-spacing:.04em}
+.ed-drop-in{animation:ed-dropIn .55s cubic-bezier(.2,.9,.25,1.1)}
+@keyframes ed-dropIn{from{opacity:0;transform:translateY(-26px) scale(.96)}to{opacity:1;transform:none}}
+.ed-sheet{margin-top:auto;display:flex;flex-direction:column;gap:8px;padding:14px;border-radius:20px 20px 14px 14px;background:#101010;border:1px solid var(--line);transform:translateY(110%);transition:transform .5s cubic-bezier(.2,.9,.25,1.05)}
+.ed-scene.show .ed-sheet{transform:none}
+.ed-act{display:flex;align-items:center;gap:11px;padding:13px 14px;border-radius:13px;font-size:13px;color:var(--fg);background:#171717;border:1px solid transparent}
+.ed-act .ai{color:var(--dim);display:grid;place-items:center}
+.ed-act.hot{border-color:rgba(255,255,255,.55);background:rgba(255,255,255,.06)}
+.ed-act.hot .ai{color:var(--fg)}
+.ed-send{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px}
+.ed-prog{width:170px;height:6px;border-radius:6px;background:#191919;overflow:hidden}
+.ed-prog i{display:block;height:100%;width:0;background:var(--fg);border-radius:6px}
+.ed-scene.show .ed-prog i{animation:ed-fill 1.1s ease forwards}
+@keyframes ed-fill{to{width:100%}}
+.ed-send small{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.ed-check{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.10);color:var(--fg);opacity:0}
+.ed-scene.show .ed-check{animation:ed-pop .4s ease .95s forwards}
+@keyframes ed-pop{0%{opacity:0;transform:scale(.6)}60%{transform:scale(1.12)}100%{opacity:1;transform:scale(1)}}
+.ed-globe-wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px}
+.ed-globe{position:relative;width:170px;height:170px}
+.ed-globe .ring{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(255,255,255,.42);animation:ed-radiate 2.6s ease-out infinite}
+.ed-globe .ring:nth-child(2){animation-delay:.9s}
+.ed-globe .ring:nth-child(3){animation-delay:1.8s}
+@keyframes ed-radiate{0%{transform:scale(.55);opacity:.9}100%{transform:scale(1.25);opacity:0}}
+.ed-ball{position:absolute;inset:24px;border-radius:50%;background:radial-gradient(circle at 34% 30%,#1c1c1c,#0c0c0c);border:1px solid var(--line-strong);overflow:hidden}
+.ed-ball::before,.ed-ball::after{content:"";position:absolute;inset:0;border-radius:50%;border:1px solid rgba(255,255,255,.22)}
+.ed-ball::before{transform:scaleX(.45)}
+.ed-ball::after{transform:scaleY(.45)}
+.ed-orbit{position:absolute;inset:0;animation:ed-spin 7s linear infinite}
+.ed-dot{position:absolute;top:-5px;left:50%;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--fg);box-shadow:0 0 10px rgba(255,255,255,.7)}
+.ed-orbit.b{animation-duration:5s;animation-direction:reverse}
+.ed-orbit.b .ed-dot{background:var(--dim);box-shadow:0 0 8px rgba(255,255,255,.3)}
+@keyframes ed-spin{to{transform:rotate(360deg)}}
+.ed-globe-wrap b{font-family:var(--sans);font-weight:800;font-size:15px}
+.ed-globe-wrap small{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.ed-cap{display:flex;flex-direction:column;align-items:center;gap:14px}
+.ed-cap-text{font-family:var(--sans);font-weight:800;font-size:clamp(18px,4.5vw,24px);letter-spacing:-.01em;min-height:30px;text-align:center;transition:opacity .35s}
+.ed-cap-text em{color:var(--fg);font-style:normal}
+.ed-steps{display:flex;gap:8px}
+.ed-steps span{width:7px;height:7px;border-radius:50%;background:var(--line-strong);transition:all .4s}
+.ed-steps span.on{background:var(--fg);width:22px;border-radius:4px}
+@media (prefers-reduced-motion:reduce){
+  .ed-arrow,.ed-orbit,.ed-globe .ring{animation:none}
+}
 </style>
 </head>
 <body>
@@ -225,6 +302,80 @@ footer a:hover{color:var(--ac)}
             <span class="arrow">Try it →</span>
           </div>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec how" id="how">
+    <div class="how-head">
+      <div class="column-label">How it works</div>
+      <h2>One drop. <em>Everywhere.</em></h2>
+      <p>Drop a file, a note, anything — pick what to do with it, and it’s instantly on all your devices. Watch a live run:</p>
+    </div>
+
+    <div class="eving-demo" id="evingDemo">
+      <div class="ed-phone">
+        <div class="ed-notch"></div>
+        <div class="ed-screen">
+          <div class="ed-bar">
+            <div class="ed-bar-row">
+              <span class="ed-logo" translate="no">EVING<span class="tm">™</span></span>
+              <span class="ed-time">9:41</span>
+            </div>
+            <div class="ed-tabs">
+              <span class="ed-tab on" data-tab="drop">Drop</span>
+              <span class="ed-tab" data-tab="space">Space</span>
+            </div>
+          </div>
+          <div class="ed-stage">
+            <div class="ed-scene" data-scene="0">
+              <div class="ed-drop">
+                <span class="ed-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg></span>
+                <small>Drop a file</small>
+              </div>
+            </div>
+            <div class="ed-scene" data-scene="1">
+              <div class="ed-file ed-drop-in">
+                <span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
+                <div class="meta"><div class="nm">report.pdf</div><div class="sz">2.4 MB · just now</div></div>
+              </div>
+            </div>
+            <div class="ed-scene" data-scene="2">
+              <div class="ed-file"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
+                <div class="meta"><div class="nm">report.pdf</div><div class="sz">2.4 MB</div></div></div>
+              <div class="ed-sheet">
+                <div class="ed-act"><span class="ai"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>Copy</div>
+                <div class="ed-act"><span class="ai"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>Save to Space</div>
+                <div class="ed-act hot"><span class="ai"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg></span>Send to device</div>
+              </div>
+            </div>
+            <div class="ed-scene" data-scene="3">
+              <div class="ed-send">
+                <div class="ed-check"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+                <div class="ed-prog"><i></i></div>
+                <small>Sending…</small>
+              </div>
+            </div>
+            <div class="ed-scene" data-scene="4">
+              <div class="ed-globe-wrap">
+                <div class="ed-globe">
+                  <span class="ring"></span><span class="ring"></span><span class="ring"></span>
+                  <div class="ed-ball"></div>
+                  <div class="ed-orbit"><span class="ed-dot"></span></div>
+                  <div class="ed-orbit b"><span class="ed-dot"></span></div>
+                </div>
+                <div style="text-align:center;display:flex;flex-direction:column;gap:6px">
+                  <b>On all your devices</b>
+                  <small>Phone · Laptop · Tablet</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ed-cap">
+        <div class="ed-cap-text" id="edCap"></div>
+        <div class="ed-steps" id="edSteps"></div>
       </div>
     </div>
   </section>
@@ -290,6 +441,49 @@ footer a:hover{color:var(--ac)}
       }
     }, true);
   }
+
+  // HOW IT WORKS — live one-phone demo: cycles scenes; pauses when off-screen.
+  (function(){
+    var root = document.getElementById('evingDemo');
+    if (!root) return;
+    var scenes = root.querySelectorAll('.ed-scene');
+    var tabs = root.querySelectorAll('.ed-tab');
+    var capEl = document.getElementById('edCap');
+    var stepsEl = document.getElementById('edSteps');
+    // [caption(html), active tab, duration ms]
+    var STEPS = [
+      ['Drop <em>anything</em>', 'drop', 1700],
+      ['It’s <em>caught</em>', 'drop', 1700],
+      ['Pick an <em>action</em>', 'drop', 2100],
+      ['<em>Sending…</em>', 'drop', 1900],
+      ['<em>Everywhere</em>', 'space', 2400]
+    ];
+    STEPS.forEach(function(){ stepsEl.appendChild(document.createElement('span')); });
+    var dots = stepsEl.querySelectorAll('span');
+    var i = -1, timer = null, visible = true;
+    function render(){
+      var step = STEPS[i];
+      scenes.forEach(function(sc, idx){ sc.classList.toggle('show', idx === i); });
+      tabs.forEach(function(t){ t.classList.toggle('on', t.dataset.tab === step[1]); });
+      dots.forEach(function(d, idx){ d.classList.toggle('on', idx === i); });
+      capEl.style.opacity = 0;
+      setTimeout(function(){ capEl.innerHTML = step[0]; capEl.style.opacity = 1; }, 180);
+    }
+    function go(){
+      i = (i + 1) % STEPS.length;
+      render();
+      if (visible) timer = setTimeout(go, STEPS[i][2]);
+    }
+    // запуск + пауза вне видимости (perf на лендинге)
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(entries){
+        var on = entries[0].isIntersecting;
+        if (on && !visible) { visible = true; timer = setTimeout(go, 400); }
+        else if (!on && visible) { visible = false; clearTimeout(timer); }
+      }, { threshold: 0.25 }).observe(root);
+    }
+    go();
+  })();
 </script>
 </body>
 </html>
