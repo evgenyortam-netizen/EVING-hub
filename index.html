@@ -250,10 +250,6 @@ footer a:hover{color:var(--ac)}
 </head>
 <body>
 
-<div class="intro" aria-hidden="true">
-  <img class="ieving-signature" src="/assets/ieving.png" alt="ieving" width="420" height="276">
-</div>
-
 <div class="menu-overlay" id="menu" aria-hidden="true">
   <button class="menu-close" aria-label="Close menu">Close ✕</button>
   <nav class="menu-nav">
@@ -299,78 +295,6 @@ footer a:hover{color:var(--ac)}
     </div>
   </section>
 
-  <section class="sec how" id="how">
-    <div class="how-head">
-      <div class="column-label">How it works</div>
-      <h2>One drop. <em>Everywhere.</em></h2>
-      <p>Drop a file, a note, anything — pick what to do with it, and it’s instantly on all your devices. Watch a live run:</p>
-    </div>
-
-    <div class="eving-demo" id="evingDemo">
-      <div class="ed-phone">
-        <div class="ed-notch"></div>
-        <div class="ed-screen">
-          <div class="ed-bar">
-            <div class="ed-bar-row">
-              <span class="ed-logo" translate="no">EVING<span class="tm">™</span></span>
-              <span class="ed-time">9:41</span>
-            </div>
-            <div class="ed-tabs">
-              <span class="ed-tab on" data-tab="drop">Drop</span>
-              <span class="ed-tab" data-tab="space">Space</span>
-            </div>
-          </div>
-          <div class="ed-stage">
-            <div class="ed-scene" data-scene="0">
-              <div class="ed-drop">
-                <span class="ed-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg></span>
-                <small>Drop a file</small>
-              </div>
-            </div>
-            <div class="ed-scene" data-scene="1">
-              <div class="ed-file ed-drop-in">
-                <span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
-                <div class="meta"><div class="nm">report.pdf</div><div class="sz">2.4 MB · just now</div></div>
-              </div>
-            </div>
-            <div class="ed-scene" data-scene="2">
-              <div class="ed-file"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
-                <div class="meta"><div class="nm">report.pdf</div><div class="sz">2.4 MB</div></div></div>
-              <div class="ed-sheet">
-                <div class="ed-act"><span class="ai"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>Copy</div>
-                <div class="ed-act"><span class="ai"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>Save to Space</div>
-                <div class="ed-act hot"><span class="ai"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg></span>Send to device</div>
-              </div>
-            </div>
-            <div class="ed-scene" data-scene="3">
-              <div class="ed-send">
-                <div class="ed-check"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
-                <div class="ed-prog"><i></i></div>
-                <small>Sending…</small>
-              </div>
-            </div>
-            <div class="ed-scene" data-scene="4">
-              <div class="ed-globe-wrap">
-                <div class="ed-globe">
-                  <canvas class="ed-earth" width="240" height="240"></canvas>
-                  <div class="ed-orbit"><span class="ed-dot"></span></div>
-                  <div class="ed-orbit b"><span class="ed-dot"></span></div>
-                </div>
-                <div style="text-align:center;display:flex;flex-direction:column;gap:6px">
-                  <b>On all your devices</b>
-                  <small>Phone · Laptop · Tablet</small>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="ed-cap">
-        <div class="ed-cap-text" id="edCap"></div>
-        <div class="ed-steps" id="edSteps"></div>
-      </div>
-    </div>
-  </section>
 
   <div class="manifesto"><span translate="no">eving</span> lab</div>
 
@@ -434,99 +358,6 @@ footer a:hover{color:var(--ac)}
     }, true);
   }
 
-  // HOW IT WORKS — live one-phone demo: cycles scenes; pauses when off-screen.
-  (function(){
-    var root = document.getElementById('evingDemo');
-    if (!root) return;
-    var scenes = root.querySelectorAll('.ed-scene');
-    var tabs = root.querySelectorAll('.ed-tab');
-    var capEl = document.getElementById('edCap');
-    var stepsEl = document.getElementById('edSteps');
-    // [caption(html), active tab, duration ms]
-    var STEPS = [
-      ['Drop <em>anything</em>', 'drop', 1700],
-      ['It’s <em>caught</em>', 'drop', 1700],
-      ['Pick an <em>action</em>', 'drop', 2100],
-      ['<em>Sending…</em>', 'drop', 1900],
-      ['<em>Everywhere</em>', 'space', 2400]
-    ];
-    STEPS.forEach(function(){ stepsEl.appendChild(document.createElement('span')); });
-    var dots = stepsEl.querySelectorAll('span');
-    var i = -1, timer = null, visible = true;
-    function render(){
-      var step = STEPS[i];
-      scenes.forEach(function(sc, idx){ sc.classList.toggle('show', idx === i); });
-      tabs.forEach(function(t){ t.classList.toggle('on', t.dataset.tab === step[1]); });
-      dots.forEach(function(d, idx){ d.classList.toggle('on', idx === i); });
-      capEl.style.opacity = 0;
-      setTimeout(function(){ capEl.innerHTML = step[0]; capEl.style.opacity = 1; }, 180);
-    }
-    function go(){
-      i = (i + 1) % STEPS.length;
-      render();
-      if (visible) timer = setTimeout(go, STEPS[i][2]);
-    }
-    // запуск + пауза вне видимости (perf на лендинге)
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function(entries){
-        var on = entries[0].isIntersecting;
-        if (on && !visible) { visible = true; timer = setTimeout(go, 400); }
-        else if (!on && visible) { visible = false; clearTimeout(timer); }
-      }, { threshold: 0.25 }).observe(root);
-    }
-    go();
-  })();
-
-  // Rotating Earth (E3) inside the globe scene — same look as the app demo.
-  // Lazy-loads d3 + world map only when the section scrolls into view; the
-  // orbiting dots around it are pure CSS.
-  (function(){
-    var canvas = document.querySelector('.ed-earth');
-    if (!canvas) return;
-    var started = false;
-    function loadScript(src){
-      return new Promise(function(res, rej){
-        var s = document.createElement('script');
-        s.src = src; s.onload = res; s.onerror = rej;
-        document.head.appendChild(s);
-      });
-    }
-    function startEarth(){
-      if (started) return; started = true;
-      Promise.all([
-        loadScript('https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js'),
-        loadScript('https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js')
-      ]).then(function(){
-        return fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(function(r){ return r.json(); });
-      }).then(function(topo){
-        if (!window.d3 || !window.topojson) return;
-        var ctx = canvas.getContext('2d');
-        var dpr = Math.min(window.devicePixelRatio || 1, 2);
-        var SIZE = 120, W = Math.round(SIZE * dpr);
-        canvas.width = W; canvas.height = W;
-        canvas.style.width = SIZE + 'px'; canvas.style.height = SIZE + 'px';
-        var proj = d3.geoOrthographic().scale(W / 2 - dpr * 2).translate([W / 2, W / 2]).clipAngle(90);
-        var path = d3.geoPath(proj, ctx);
-        var land = topojson.feature(topo, topo.objects.countries);
-        var rot = 30;
-        function draw(){
-          proj.rotate([rot, -18]);
-          ctx.clearRect(0, 0, W, W);
-          ctx.beginPath(); path({ type: 'Sphere' }); ctx.fillStyle = '#050505'; ctx.fill();
-          ctx.beginPath(); path(land); ctx.fillStyle = '#d2d2d2'; ctx.fill();
-          ctx.beginPath(); path({ type: 'Sphere' }); ctx.strokeStyle = 'rgba(255,255,255,.5)'; ctx.lineWidth = 1.5 * dpr; ctx.stroke();
-          rot += 0.25;
-          requestAnimationFrame(draw);
-        }
-        draw();
-      }).catch(function(){ /* keep dark fallback */ });
-    }
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function(entries){ if (entries[0].isIntersecting) startEarth(); }, { threshold: 0.1 }).observe(canvas);
-    } else {
-      startEarth();
-    }
-  })();
 </script>
 </body>
 </html>
